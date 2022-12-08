@@ -13,7 +13,7 @@
     @content;
   }
 }
-
+$bg-img: url('./img/bg.png');
 .formContainer {
   background-color: #a7bcff;
   height: 100vh;
@@ -108,16 +108,20 @@
     .sidebar {
       flex: 1;
       background-color: #3e3c61;
+      background-color: white;
+      
       position: relative;
       // overflow-y: auto;
       .navbar {
         display: flex;
         align-items: center;
         background-color: #2f2d52;
+        background-color: #f0f2f5;
         height: 50px;
         padding: 10px;
         justify-content: space-between;
-        color: #ddddf7;
+        // color: #ddddf7;
+        color: black;
 
         .logo {
           font-weight: bold;
@@ -140,7 +144,10 @@
 
           button {
             background-color: #5d5b8d;
-            color: #ddddf7;
+            background-color: #4f4ffc;
+            border-radius: 5px;
+            color: white;
+            font-weight:600;
             font-size: 10px;
             border: none;
             cursor: pointer;
@@ -152,22 +159,30 @@
         }
       }
       .search {
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid lightgray;
+        .search-form-wrapper{
+          padding: 8px 16px;
+          .searchForm {
+            padding: 10px;
+            // outline: 2px solid red;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #f0f2f5;
+            border-radius: 10px;
+            input {
+              background-color: transparent;
+              border: none;
+              color: white;
+              color: black;
+              outline: none;
 
-        .searchForm {
-          padding: 10px;
-
-          input {
-            background-color: transparent;
-            border: none;
-            color: white;
-            outline: none;
-
-            &::placeholder {
-              color: lightgray;
+              &::placeholder {
+                color: black;
+              }
             }
           }
-        }
+      }
       }
 
       .userChat {
@@ -176,10 +191,12 @@
         align-items: center;
         gap: 10px;
         color: white;
+        color: black;
         cursor: pointer;
-
+        border-bottom: 1px solid lightgray;
         &:hover {
           background-color: #2f2d52;
+          background-color: #f0f2f5;
         }
 
         img {
@@ -197,35 +214,47 @@
           p {
             font-size: 14px;
             color: lightgray;
+            color: black;
           }
         }
       }
     }
     .chat {
       flex: 2;
-
+      
       .chatInfo {
         height: 50px;
         background-color: #5d5b8d;
+        background-color: #f0f2f5;
         display: flex;
         align-items: center;
         justify-content: space-between;
+  
         padding: 10px;
         color: lightgray;
+        color: black;
+        border-left: 1px solid lightgrey;
       }
 
       .chatIcons {
         display: flex;
-        gap: 10px;
+        
 
-        img {
-          height: 24px;
-          cursor: pointer;
+        font-size: 1.5rem;
+        svg{
+          color: gray;
+          // outline:1px solid red;
+          margin-left: 14px;
         }
       }
-
       .messages {
-        background-color: #ddddf7;
+        // background-color: #ddddf7;
+        background-color: rgb(247, 244, 238);
+        // background-color: white;
+        background-image: $bg-img;
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
         padding: 10px;
         height: calc(100% - 160px);
         overflow-y: scroll;
@@ -256,6 +285,7 @@
 
             p {
               background-color: white;
+
               padding: 10px 20px;
               border-radius: 0px 10px 10px 10px;
               max-width: max-content;
@@ -273,7 +303,9 @@
               align-items: flex-end;
               p {
                 background-color: #8da4f1;
+                background-color: #d9fdd3;
                 color: white;
+                color: black;
                 border-radius: 10px 0px 10px 10px;
               }
             }
@@ -282,22 +314,31 @@
       }
 
       .input {
-        height: 50px;
+        box-sizing: border-box;
+        height: 70px;
         background-color: white;
-        padding: 10px;
+        background-color: #f0f2f5;
+        padding: 5px 15px;
+        font-size: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
-
+        gap: 10px;
+        svg{
+          font-weight: bold;
+          cursor: pointer;
+          color: grey;
+        }
         input {
           width: 100%;
+          height: 60%;
           border: none;
           outline: none;
           color: #2f2d52;
           font-size: 18px;
-
+          padding: 0px 10px;
           &::placeholder {
-            color: lightgray;
+            color: gray;
           }
         }
 
@@ -316,7 +357,10 @@
             padding: 10px 15px;
             color: white;
             background-color: #8da4f1;
+            background-color: #3a3aff;
             cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
           }
         }
       }

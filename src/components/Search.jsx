@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { collection, query, where, getDocs,getDoc,doc,setDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import {auth,db} from '../firebase'
-
+import {BsSearch} from 'react-icons/bs'
 import { AuthContext } from "../context/AuthContext";
 const Search = () => {
   const [userName,setUserName] = useState("");
@@ -80,15 +80,19 @@ const Search = () => {
   }
   return (
     <div className="search">
-      <div className="searchForm">
-        <input
-          type="text"
-          placeholder="enter phone number"
-          onChange={e=>{setUserName(e.target.value)}}    
-          onKeyDown={handleKey}
-          value={userName}
-        />
-      </div> 
+      <div className="search-form-wrapper">
+        <div className="searchForm">
+          <BsSearch/>
+          <input
+            type="text"
+            placeholder="Search Phone Number"
+            onChange={e=>{setUserName(e.target.value)}}    
+            onKeyDown={handleKey}
+            value={userName}
+          />
+        </div> 
+
+      </div>
       {   searchUser && 
           <div className="userChat" onClick={handleSelect}>
             <img src={searchUser?.photoURL} alt="" />

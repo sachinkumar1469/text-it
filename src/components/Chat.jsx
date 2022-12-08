@@ -9,6 +9,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useEffect } from "react";
 import { useState } from "react";
+import {BsCameraVideoFill} from 'react-icons/bs';
+import {FiSearch} from 'react-icons/fi';
+import {BsThreeDotsVertical} from 'react-icons/bs'
 
 const Chat = () => {
   const {data} = useContext(ChatContext);
@@ -38,9 +41,9 @@ const Chat = () => {
       <div className="chatInfo">
         <span>@{selectedUser?.phoneNumber} &nbsp; || &nbsp; {data?.user?.displayName}</span>
         <div className="chatIcons">
-          <img src={Cam} alt="" />
-          <img src={Add} alt="" />
-          <img src={More} alt="" />
+          <BsCameraVideoFill/>
+          <FiSearch/>
+          <BsThreeDotsVertical/>
         </div>
       </div>
       <Messages />

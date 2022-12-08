@@ -9,7 +9,9 @@ import { useContext } from 'react';
 import { ChatContext } from '../context/ChatContext';
 import { AuthContext } from '../context/AuthContext';
 import { v4 as uuid } from 'uuid'
-
+import {BsEmojiSmile} from 'react-icons/bs';
+import {ImAttachment} from 'react-icons/im';
+import {BiImages} from 'react-icons/bi'
 const Input = () => {
   const {data} = useContext(ChatContext);
   const {currentUser} = useContext(AuthContext)
@@ -67,13 +69,15 @@ const Input = () => {
   }
   return (
     <div className='input'>
-      <input type="text" name="" placeholder='type something....' id="" onChange={e=>{setText(e.target.value)}} value={text}/>
+      <BsEmojiSmile/>
+      <ImAttachment/>
+      <input type="text" name="" placeholder='Type a message' id="" onChange={e=>{setText(e.target.value)}} value={text}/>
+      <input type="file" name="" style={{display:"none"}} id="file" onChange={e=>{setImg(e.target.files[0])}}  />
+      <label htmlFor="file">
+        <BiImages/>
+      </label>
       <div className="send">
-        <img src={Attach} alt="" />
-        <input type="file" name="" style={{display:"none"}} id="file" onChange={e=>{setImg(e.target.files[0])}}  />
-        <label htmlFor="file">
-          <img src={Img} alt="" />
-        </label>
+        {/* <img src={Attach} alt="" /> */}
         <button onClick={handleSend}>Send</button>
       </div>
 

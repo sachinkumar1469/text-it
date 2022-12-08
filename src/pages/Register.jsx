@@ -5,12 +5,11 @@ import { Link } from "react-router-dom";
 import { auth,storage,db } from '../firebase'
 import React, { useState } from "react";
 import Add from "../img/addAvatar.png";
-
+import defaultImg from '../img/default_image.jpg'
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [err,setErr] = useState(false);
-
   const navigate = useNavigate();
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -18,44 +17,64 @@ const Register = () => {
     const email = e.target[1].value;
     const phoneNumber = e.target[2].value;
     const password = e.target[3].value;
-    const file = e.target[4].files[0];
+    let file = e.target[4].files[0];
+   
 
-    try{
+    try{ 
       const res = await createUserWithEmailAndPassword(auth, email, password);
       console.log(res.user)
-    
+      let downloadURLDef = "https://www.vhv.rs/dpng/d/256-2569650_men-profile-icon-png-image-free-download-searchpng.png";
       const storageRef = ref(storage, displayName);
 
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on(
-        (error) => {
-          setErr(true);
-        }, 
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref)
-          .then(async (downloadURL) => {
-            console.log('File available at', downloadURL);
-            await updateProfile(res.user,{
-              displayName,
-              phoneNumber,
-              photoURL:downloadURL,
+      if(file){
+        const uploadTask = uploadBytesResumable(storageRef, file );
+  
+        uploadTask.on(
+          (error) => {
+            setErr(true);
+          }, 
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref)
+            .then(async (downloadURL) => {
+              console.log('File available at', downloadURL);
+              downloadURLDef = downloadURL;
+              await updateProfile(res.user,{
+                displayName,
+                phoneNumber,
+                photoURL:downloadURLDef,
+              });
+              await setDoc(doc(db, "users",res.user.uid), {
+                uid:res.user.uid,
+                displayName,
+                email,
+                photoURL:downloadURLDef,
+                phoneNumber,
+              });
+              await setDoc(doc(db,'userChats',res.user.uid),{});
+              navigate('/')
             });
-            await setDoc(doc(db, "users",res.user.uid), {
-              uid:res.user.uid,
-              displayName,
-              email,
-              photoURL:downloadURL,
-              phoneNumber,
-            });
-            await setDoc(doc(db,'userChats',res.user.uid),{});
-            navigate('/')
-          });
-        }
-      );
+          }
+        );
+      } else {
+        await updateProfile(res.user,{
+          displayName,
+          phoneNumber,
+          photoURL:downloadURLDef,
+        });
+        await setDoc(doc(db, "users",res.user.uid), {
+          uid:res.user.uid,
+          displayName,
+          email,
+          photoURL:downloadURLDef,
+          phoneNumber,
+        });
+        await setDoc(doc(db,'userChats',res.user.uid),{});
+        navigate('/')
+      }
 
     } catch(err){
       setErr(true);
+      console.log('errorrrrrr')
     }
   }
 
