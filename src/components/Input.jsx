@@ -11,7 +11,8 @@ import { AuthContext } from '../context/AuthContext';
 import { v4 as uuid } from 'uuid'
 import {BsEmojiSmile} from 'react-icons/bs';
 import {ImAttachment} from 'react-icons/im';
-import {BiImages} from 'react-icons/bi'
+import {BiImages} from 'react-icons/bi';
+let count = 0;
 const Input = () => {
   const {data} = useContext(ChatContext);
   const {currentUser} = useContext(AuthContext)
@@ -19,16 +20,21 @@ const Input = () => {
   const [img,setImg] = useState(null);
   const [err,setErr] = useState(false)
   const handleSend = async ()=>{
+    count++;
+    console.log(count,"Inside handleSend");
     if(img){
       const storageRef = ref(storage, currentUser.uid);
+      console.log("Inside if condition")
       const uploadTask = uploadBytesResumable(storageRef, img);
       uploadTask.on(
         (error) => {
           setErr(true);
         }, 
         () => {
+          console.log("Inside on")
           getDownloadURL(uploadTask.snapshot.ref)
           .then(async (downloadURL) => {
+            console.log("inside download url")
             console.log('File available at', downloadURL);
             const msgRef = doc(db, "chats", data.chatId);
             await updateDoc(msgRef, {
@@ -45,6 +51,7 @@ const Input = () => {
       );
     } else {
       const msgRef = doc(db, "chats", data.chatId);
+      console.log('inside else')
       await updateDoc(msgRef, {
         messages: arrayUnion({
           msgId: uuid(),

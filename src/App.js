@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 function App() {
   const {currentUser} = useContext(AuthContext);
-  console.log(currentUser)
+  // console.log(currentUser)
   const ProtectedRoute = ({children})=>{
     if(!currentUser){
       return <Navigate to='/login'></Navigate>

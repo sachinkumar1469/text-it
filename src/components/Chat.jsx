@@ -17,7 +17,6 @@ const Chat = () => {
   const {data} = useContext(ChatContext);
   const currentSelectedUserId = data?.user?.uid || null;
   const [selectedUser,setSelectedUser] = useState();
-  console.log("render");
   useEffect(()=>{
     fetchSelectedUser();
   },[data])
@@ -28,7 +27,7 @@ const Chat = () => {
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         setSelectedUser(docSnap.data());
-        console.log(selectedUser);
+        // console.log(selectedUser);
       } else {
         console.log("No such document!");
       }

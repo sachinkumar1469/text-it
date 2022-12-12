@@ -16,6 +16,7 @@
 $bg-img: url('./img/bg.png');
 .formContainer {
   background-color: #a7bcff;
+  background-color: #4ada80;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -23,15 +24,18 @@ $bg-img: url('./img/bg.png');
 
   .formWrapper {
     background-color: white;
+    
     padding: 20px 60px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    box-shadow: 0 17px 50px 0 rgb(11 20 26 / 19%), 0 12px 15px 0 rgb(11 20 26 / 24%);
 
     .logo {
       color: #5d5b8d;
+      color:  #25d366;
       font-weight: bold;
       font-size: 24px;
 
@@ -39,6 +43,7 @@ $bg-img: url('./img/bg.png');
 
     .title {
       color: #5d5b8d;
+      color: #09d261;
       font-size: 12px;
     }
 
@@ -59,6 +64,7 @@ $bg-img: url('./img/bg.png');
 
       button {
         background-color: #7b96ec;
+        background-color: #25d366;
         color: white;
         padding: 10px;
         font-weight: bold;
@@ -70,8 +76,9 @@ $bg-img: url('./img/bg.png');
         display: flex;
         align-items: center;
         gap: 10px;
-        color: #8da4f1;
         font-size: 12px;
+        color: #8da4f1;
+        color: #008069;
         cursor: pointer;
 
         img {
