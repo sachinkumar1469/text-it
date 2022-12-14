@@ -23,13 +23,17 @@ const Input = () => {
     count++;
     console.log(count,"Inside handleSend");
     if(img){
-      const storageRef = ref(storage, currentUser.uid);
+      const storageRef = ref(storage, `chats/${currentUser.uid}`);
       console.log("Inside if condition")
       const uploadTask = uploadBytesResumable(storageRef, img);
-      uploadTask.on(
-        (error) => {
-          setErr(true);
-        }, 
+      uploadTask.on('state_changed',
+      (snapshot)=>{
+        let progress = (snapshot.bytesTransferred/snapshot.totalBytes) * 100;
+        console.log(progress);
+      },
+      (error) => {
+        setErr(true);
+      },
         () => {
           console.log("Inside on")
           getDownloadURL(uploadTask.snapshot.ref)
